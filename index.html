@@ -8,20 +8,23 @@
 </head>
 <body>
 
-  <!-- Header dan Navigation akan di-load via script.js -->
-  <div id="header"></div>
-  <div id="nav"></div>
+  <!-- Pembungkus utama untuk konten dan hero -->
+  <div class="wrapper">
+    <!-- Header dan Navigation akan di-load via script.js -->
+    <div id="header"></div>
+    <div id="nav"></div>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h2>Solusi Trading Masa Depan</h2>
-    <p>Platform terpercaya untuk investasi dan analisa pasar global</p>
-  </section>
+    <!-- Hero Section -->
+    <section class="hero">
+      <h2>Solusi Trading Masa Depan</h2>
+      <p>Platform terpercaya untuk investasi dan analisa pasar global</p>
+    </section>
+  </div>
 
-  <!-- Footer akan dimuat otomatis -->
+  <!-- Footer tetap di luar wrapper agar sticky -->
   <div id="footer"></div>
 
   <!-- Load partials -->
   <script src="script.js"></script>
 </body>
-  </html>
+</html>
