@@ -5,17 +5,29 @@ body {
   color: #e0f2ff;
 }
 
+/* Header dengan logo dan judul sejajar */
 header {
   background-color: #102840;
   padding: 1rem 2rem;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 header h1 {
   color: #ffffff;
   margin: 0;
+  font-size: 1.8rem;
 }
 
+/* Logo */
+.logo {
+  max-height: 60px;
+  width: auto;
+}
+
+/* Navigasi */
 nav {
   background-color: #1c3a5f;
   display: flex;
@@ -50,6 +62,7 @@ nav a {
   font-weight: bold;
 }
 
+/* Hero section */
 .hero {
   background: linear-gradient(to bottom, #0e1a2b, #102840), url('https://source.unsplash.com/1600x600/?finance,technology') center/cover no-repeat;
   padding: 6rem 2rem;
@@ -57,6 +70,7 @@ nav a {
   color: white;
 }
 
+/* Section umum */
 .section {
   padding: 3rem 2rem;
   max-width: 900px;
@@ -67,6 +81,7 @@ nav a {
   color: #00bfff;
 }
 
+/* Tombol */
 button {
   background-color: #0077ff;
   color: white;
@@ -81,6 +96,7 @@ button:hover {
   background-color: #005ec2;
 }
 
+/* Footer */
 footer {
   background-color: #0a1f3d;
   padding: 1rem;
@@ -88,6 +104,7 @@ footer {
   color: #ccc;
 }
 
+/* Form */
 input, textarea {
   width: 100%;
   padding: 0.5rem;
@@ -99,6 +116,7 @@ input, textarea {
   color: #e0f2ff;
 }
 
+/* Responsive menu */
 @media (max-width: 768px) {
   .menu-toggle {
     display: flex;
@@ -114,5 +132,14 @@ input, textarea {
 
   .nav-links.active {
     display: flex;
+  }
+
+  header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .logo {
+    max-height: 50px;
   }
   }
