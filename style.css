@@ -17,6 +17,13 @@ body {
   color: #e0f2ff;
 }
 
+/* Kontainer utama */
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Header */
 header {
   background-color: #102840;
@@ -89,7 +96,7 @@ nav a:visited {
 
 /* Konten Utama */
 .section {
-  flex: 1; /* Dorong footer ke bawah */
+  flex: 1;
   padding: 3rem 2rem;
   max-width: 900px;
   margin: auto;
@@ -156,4 +163,4 @@ footer {
   .logo {
     max-width: 180px;
   }
-}
+  }
