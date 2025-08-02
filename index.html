@@ -8,22 +8,9 @@
 </head>
 <body>
 
-  <header class="header-logo">
-    <img src="assets/gambar/logo.png" alt="Logo NEWGROHO24" class="logo">
-  </header>
-
-  <nav>
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </div>
-    <div class="nav-links" id="navLinks">
-      <a href="index.html">Beranda</a>
-      <a href="tentang.html">Tentang</a>
-      <a href="layanan.html">Layanan</a>
-      <a href="analisa.html">Analisa</a>
-      <a href="kontak.html">Kontak</a>
-    </div>
-  </nav>
+  <!-- Load header dan nav dari partials -->
+  <div id="header"></div>
+  <div id="nav"></div>
 
   <div class="hero">
     <h2>Solusi Trading Masa Depan</h2>
@@ -34,12 +21,6 @@
     <p>© 2025 NEWGROHO24. All rights reserved.</p>
   </footer>
 
-  <script>
-    function toggleMenu() {
-      const navLinks = document.getElementById('navLinks');
-      navLinks.classList.toggle('active');
-    }
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
