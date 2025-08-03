@@ -1,7 +1,7 @@
-<nav>
-  <div class="menu-toggle">
+<nav aria-label="Navigasi utama">
+  <button class="menu-toggle" aria-label="Toggle Menu">
     <span></span><span></span><span></span>
-  </div>
+  </button>
   <div class="nav-links" id="navLinks">
     <a href="../index.html">Beranda</a>
     <a href="tentang.html">Tentang</a>
@@ -9,15 +9,4 @@
     <a href="analisa.html">Analisa</a>
     <a href="kontak.html">Kontak</a>
   </div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const toggle = document.querySelector('.menu-toggle');
-      const navLinks = document.getElementById('navLinks');
-      if (toggle && navLinks) {
-        toggle.addEventListener('click', () => {
-          navLinks.classList.toggle('active');
-        });
-      }
-    });
-  </script>
 </nav>
