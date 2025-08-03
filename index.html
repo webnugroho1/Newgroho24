@@ -4,66 +4,309 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NEWGROHO24 | Beranda</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
-    body { font-family: sans-serif; margin: 0; }
-    header, nav, footer { background-color: #222; color: white; padding: 10px; }
-    nav a { color: white; margin-right: 15px; text-decoration: none; }
-    .hero { padding: 20px; background-color: #eee; text-align: center; }
-    section { padding: 20px; }
+    :root {
+      --primary-color: #0d1b2a;
+      --accent-color: #1b9aaa;
+      --text-light: #f0f0f0;
+      --text-dark: #333;
+      --bg-light: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--primary-color);
+      color: var(--text-light);
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      letter-spacing: 1.5px;
+    }
+
+    nav {
+      background-color: #112b3c;
+      border-top: 3px solid var(--accent-color);
+      position: relative;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.2rem;
+      padding: 15px 20px;
+      color: var(--text-light);
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .menu-text {
+      animation: blink 1s infinite;
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    .nav-container {
+      max-width: 960px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      padding: 15px 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav-container a,
+    .dropdown-btn {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .nav-container a:hover,
+    .dropdown-btn:hover {
+      color: var(--accent-color);
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #0d1b2a;
+      top: 100%;
+      left: 0;
+      min-width: 180px;
+      z-index: 1000;
+      border: 1px solid var(--accent-color);
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px 15px;
+      color: var(--text-light);
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #1b263b;
+      color: var(--accent-color);
+    }
+
+    .dropdown.open .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-btn::after {
+      content: "▼";
+      margin-left: 6px;
+      font-size: 0.75em;
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .dropdown.open .dropdown-btn::after {
+      transform: rotate(180deg);
+    }
+
+    .hero {
+      background: linear-gradient(to right, #0d1b2a, #1b263b);
+      color: white;
+      text-align: center;
+      padding: 90px 20px;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #d3e0ea;
+    }
+
+    section {
+      padding: 50px 20px;
+      max-width: 960px;
+      margin: auto;
+    }
+
+    section h2 {
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 5px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    footer {
+      background-color: var(--primary-color);
+      color: #ccc;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+
+    a {
+      color: var(--accent-color);
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+        position: absolute;
+        left: 10px;
+        top: 10px;
+      }
+
+      .nav-container {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 20px;
+        text-align: center;
+      }
+
+      .nav-container.active {
+        display: flex;
+      }
+
+      .dropdown-content {
+        position: static;
+        width: 100%;
+        border: none;
+        background-color: #112b3c;
+      }
+
+      .dropdown-content a {
+        text-align: center;
+        padding: 10px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <!-- Header -->
-    <header>
-      <h1>NEWGROHO24</h1>
-    </header>
 
-    <!-- Navigation -->
-    <nav>
+  <!-- Header -->
+  <header>
+    <h1>NEWGROHO24</h1>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <button class="menu-toggle" onclick="toggleMenu()">
+      ☰ <span class="menu-text">MENU</span>
+    </button>
+
+    <div class="nav-container" id="navContainer">
       <a href="#beranda">Beranda</a>
       <a href="#profil">Profil</a>
-      <a href="#layanan">Layanan</a>
+      <div class="dropdown">
+        <span class="dropdown-btn" onclick="toggleDropdown(this)">Layanan</span>
+        <div class="dropdown-content">
+          <a href="#layanan">Semua Layanan</a>
+          <a href="#">Signal Harian</a>
+          <a href="#">Analisa Pasar</a>
+          <a href="#">Webinar</a>
+        </div>
+      </div>
       <a href="#kontak">Kontak</a>
-    </nav>
-
-    <!-- Konten -->
-    <div id="content">
-      <!-- Beranda -->
-      <section id="beranda" class="hero">
-        <h2>Solusi Trading Masa Depan</h2>
-        <p>Platform terpercaya untuk investasi dan analisa pasar global</p>
-      </section>
-
-      <!-- Profil -->
-      <section id="profil">
-        <h2>Tentang Kami</h2>
-        <p>Kami adalah komunitas trader profesional yang membantu Anda memahami pasar global.</p>
-      </section>
-
-      <!-- Layanan -->
-      <section id="layanan">
-        <h2>Layanan Kami</h2>
-        <ul>
-          <li>Signal Trading Harian</li>
-          <li>Analisa Teknikal & Fundamental</li>
-          <li>Workshop & Webinar</li>
-        </ul>
-      </section>
-
-      <!-- Kontak -->
-      <section id="kontak">
-        <h2>Hubungi Kami</h2>
-        <p>Email: info@newgroho24.com</p>
-        <p>WhatsApp: +62 812-3456-7890</p>
-      </section>
     </div>
+  </nav>
 
-    <!-- Footer -->
-    <footer>
-      <p>&copy; 2025 NEWGROHO24. All rights reserved.</p>
-    </footer>
-  </div>
+  <!-- Content -->
+  <main>
+    <section id="beranda" class="hero">
+      <h2>Solusi Trading Masa Depan</h2>
+      <p>Platform terpercaya untuk investasi dan analisa pasar global</p>
+    </section>
+
+    <section id="profil">
+      <h2>Tentang Kami</h2>
+      <p>NEWGROHO24 adalah komunitas trader profesional yang berdedikasi dalam membantu Anda memahami dan menavigasi pasar global dengan strategi modern dan terpercaya.</p>
+    </section>
+
+    <section id="layanan">
+      <h2>Layanan Kami</h2>
+      <ul>
+        <li>Signal Trading Harian berbasis AI</li>
+        <li>Analisa Teknikal & Fundamental mendalam</li>
+        <li>Workshop & Webinar bersama trader ahli</li>
+      </ul>
+    </section>
+
+    <section id="kontak">
+      <h2>Hubungi Kami</h2>
+      <p>Email: <a href="mailto:info@newgroho24.com">info@newgroho24.com</a></p>
+      <p>WhatsApp: <a href="https://wa.me/6281234567890" target="_blank">+62 812-3456-7890</a></p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 NEWGROHO24. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    function toggleMenu() {
+      document.getElementById('navContainer').classList.toggle('active');
+    }
+
+    function toggleDropdown(el) {
+      const dropdown = el.parentElement;
+      dropdown.classList.toggle('open');
+    }
+
+    window.addEventListener('click', function(e) {
+      document.querySelectorAll('.dropdown').forEach(drop => {
+        if (!drop.contains(e.target)) {
+          drop.classList.remove('open');
+        }
+      });
+    });
+  </script>
+
 </body>
-          </html>
+</html>
