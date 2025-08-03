@@ -198,6 +198,17 @@
       text-decoration: underline;
     }
 
+    /* Dropdown hover di desktop */
+    @media (min-width: 769px) {
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      .dropdown:hover .dropdown-btn::after {
+        transform: rotate(180deg);
+      }
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .menu-toggle {
@@ -244,12 +255,10 @@
 </head>
 <body>
 
-  <!-- Header -->
   <header>
     <h1>NEWGROHO24</h1>
   </header>
 
-  <!-- Navigation -->
   <nav>
     <button class="menu-toggle" onclick="toggleMenu()">
       ☰ <span class="menu-text">MENU</span>
@@ -259,7 +268,7 @@
       <a href="#beranda">Beranda</a>
       <a href="#profil">Profil</a>
       <div class="dropdown">
-        <span class="dropdown-btn" onclick="toggleDropdown(this)">Layanan</span>
+        <span class="dropdown-btn">Layanan</span>
         <div class="dropdown-content">
           <a href="#layanan">Semua Layanan</a>
           <a href="#">Signal Harian</a>
@@ -271,7 +280,6 @@
     </div>
   </nav>
 
-  <!-- Content -->
   <main>
     <section id="beranda" class="hero">
       <h2>Solusi Trading Masa Depan</h2>
@@ -299,12 +307,10 @@
     </section>
   </main>
 
-  <!-- Footer -->
   <footer>
     <p>&copy; 2025 NEWGROHO24. All rights reserved.</p>
   </footer>
 
-  <!-- Scripts -->
   <script>
     function toggleMenu() {
       document.getElementById('navContainer').classList.toggle('active');
@@ -322,7 +328,17 @@
         }
       });
     });
+
+    // Untuk klik di mobile
+    document.addEventListener('DOMContentLoaded', function () {
+      const dropdownBtn = document.querySelector('.dropdown-btn');
+      if (window.innerWidth <= 768 && dropdownBtn) {
+        dropdownBtn.addEventListener('click', function () {
+          toggleDropdown(this);
+        });
+      }
+    });
   </script>
 
 </body>
-</html>
+                </html>
