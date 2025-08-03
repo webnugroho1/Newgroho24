@@ -45,9 +45,8 @@
     }
 
     .menu-toggle {
-      display: none;
-      font-size: 1.2rem;
-      padding: 15px 20px;
+      font-size: 1.5rem;
+      padding: 18px 20px;
       color: var(--text-light);
       background: none;
       border: none;
@@ -55,12 +54,17 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      z-index: 9999;
     }
 
     .menu-text {
       animation: blink 1s infinite;
       color: var(--accent-color);
       font-weight: bold;
+      font-size: 1.3rem;
     }
 
     @keyframes blink {
@@ -83,9 +87,11 @@
     .dropdown-btn {
       color: var(--text-light);
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
       position: relative;
+      font-size: 1.2rem;
+      padding: 10px 5px;
     }
 
     .nav-container a:hover,
@@ -110,9 +116,10 @@
 
     .dropdown-content a {
       display: block;
-      padding: 10px 15px;
+      padding: 12px 18px;
       color: var(--text-light);
       text-decoration: none;
+      font-size: 1.1rem;
     }
 
     .dropdown-content a:hover {
@@ -195,21 +202,29 @@
     @media (max-width: 768px) {
       .menu-toggle {
         display: flex;
-        position: absolute;
-        left: 10px;
-        top: 10px;
       }
 
       .nav-container {
         display: none;
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
         padding: 10px 20px;
-        text-align: center;
+        text-align: left;
+        align-items: flex-start;
+        background-color: #112b3c;
+        position: relative;
+        z-index: 1;
+        margin-top: 60px;
       }
 
       .nav-container.active {
         display: flex;
+      }
+
+      .nav-container a,
+      .dropdown-btn {
+        font-size: 1.3rem;
+        padding: 12px 10px;
       }
 
       .dropdown-content {
@@ -220,8 +235,9 @@
       }
 
       .dropdown-content a {
-        text-align: center;
-        padding: 10px;
+        text-align: left;
+        padding: 14px 18px;
+        font-size: 1.2rem;
       }
     }
   </style>
