@@ -33,9 +33,9 @@
       padding: 30px 20px;
     }
 
-    header h1 {
-      font-size: 2.2rem;
-      letter-spacing: 1.5px;
+    header img {
+      max-width: 220px;
+      height: auto;
     }
 
     nav {
@@ -198,7 +198,6 @@
       text-decoration: underline;
     }
 
-    /* Dropdown hover di desktop */
     @media (min-width: 769px) {
       .dropdown:hover .dropdown-content {
         display: block;
@@ -209,7 +208,6 @@
       }
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .menu-toggle {
         display: flex;
@@ -256,7 +254,7 @@
 <body>
 
   <header>
-    <h1>NEWGROHO24</h1>
+    <img src="images/logo.png" alt="Logo NEWGROHO24" />
   </header>
 
   <nav>
@@ -266,7 +264,6 @@
 
     <div class="nav-container" id="navContainer">
       <a href="#beranda">Beranda</a>
-      <!-- Dihapus: <a href="#profil">Profil</a> -->
       <div class="dropdown">
         <span class="dropdown-btn">Layanan</span>
         <div class="dropdown-content">
@@ -285,8 +282,6 @@
       <h2>Solusi Trading Masa Depan</h2>
       <p>Platform terpercaya untuk investasi dan analisa pasar global</p>
     </section>
-
-    <!-- Dihapus: Section Profil -->
 
     <section id="layanan">
       <h2>Layanan Kami</h2>
