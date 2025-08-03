@@ -1,166 +1,39 @@
-/* Global Reset & Sticky Footer Setup */
-* {
-  box-sizing: border-box;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
 body {
-  display: flex;
-  flex-direction: column;
-  font-family: Arial, sans-serif;
-  background-color: #0e1a2b;
-  color: #e0f2ff;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f4f4;
+  color: #333;
 }
 
-/* Kontainer utama */
 .wrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Header */
-header {
-  background-color: #102840;
-  padding: 1rem 2rem;
-  text-align: center;
-}
-
-.logo {
-  max-width: 250px;
-  height: auto;
-  display: block;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 0.5rem 0;
-  object-fit: contain;
 }
 
-/* Navigation */
-nav {
-  background-color: #1c3a5f;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  flex-wrap: wrap;
-}
-
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-}
-
-.menu-toggle span {
-  height: 3px;
-  background: #e0f2ff;
-  margin: 4px 0;
-  width: 25px;
-  border-radius: 2px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 1.5rem;
+header, nav, footer {
+  background-color: #222;
+  color: white;
+  padding: 1em;
 }
 
 nav a {
-  color: #00bfff;
+  color: white;
+  margin-right: 15px;
   text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
 }
 
 nav a:hover {
   text-decoration: underline;
 }
 
-nav a:visited {
-  color: #00bfff;
-}
-
-/* Hero Section */
 .hero {
-  background: linear-gradient(to bottom, #0e1a2b, #102840),
-              url('https://source.unsplash.com/1600x600/?finance,technology') 
-              center/cover no-repeat;
-  padding: 6rem 2rem;
-  text-align: center;
-  color: white;
+  padding: 2em;
+  background: linear-gradient(135deg, #f9f9f9, #e0e0e0);
+  border-radius: 8px;
+  margin-top: 20px;
 }
 
-/* Konten Utama */
-.section {
-  flex: 1;
-  padding: 3rem 2rem;
-  max-width: 900px;
-  margin: auto;
-}
-
-.section h2 {
-  color: #00bfff;
-}
-
-/* Tombol */
-button {
-  background-color: #0077ff;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #005ec2;
-}
-
-/* Form */
-input, textarea {
-  width: 100%;
-  padding: 0.5rem;
-  border: none;
-  border-radius: 4px;
-  margin-top: 0.2rem;
-  margin-bottom: 1rem;
-  background-color: #162b45;
-  color: #e0f2ff;
-}
-
-/* Footer */
 footer {
-  background-color: #0a1f3d;
-  padding: 1rem;
   text-align: center;
-  color: #ccc;
+  margin-top: 40px;
 }
-
-/* Responsif */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: flex;
-  }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    text-align: center;
-    margin-top: 0.5rem;
-  }
-
-  .nav-links.active {
-    display: flex;
-  }
-
-  .logo {
-    max-width: 180px;
-  }
-  }
