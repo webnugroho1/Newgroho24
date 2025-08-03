@@ -1,79 +1,23 @@
 <nav>
-  <div class="menu-toggle" onclick="toggleMenu()">
+  <div class="menu-toggle">
     <span></span><span></span><span></span>
   </div>
   <div class="nav-links" id="navLinks">
-    <a href="index.html">Beranda</a>
-    <a href="pages/tentang.html">Tentang</a>
-    <a href="pages/layanan.html">Layanan</a>
-    <a href="pages/analisa.html">Analisa</a>
-    <a href="pages/berita.html">Berita</a>
-    <a href="pages/kontak.html">Kontak</a>
+    <a href="../index.html">Beranda</a>
+    <a href="tentang.html">Tentang</a>
+    <a href="layanan.html">Layanan</a>
+    <a href="analisa.html">Analisa</a>
+    <a href="kontak.html">Kontak</a>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggle = document.querySelector('.menu-toggle');
+      const navLinks = document.getElementById('navLinks');
+      if (toggle && navLinks) {
+        toggle.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+        });
+      }
+    });
+  </script>
 </nav>
-
-<style>
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background: #f8f8f8;
-    z-index: 999;
-    position: sticky;
-    top: 0;
-  }
-
-  .menu-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-  }
-
-  .menu-toggle span {
-    height: 3px;
-    width: 25px;
-    background: #333;
-    margin: 4px 0;
-    transition: 0.3s;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 20px;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-  }
-
-  .nav-links a:hover {
-    text-decoration: underline;
-  }
-
-  @media (max-width: 768px) {
-    .menu-toggle {
-      display: flex;
-    }
-
-    .nav-links {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      background: #f8f8f8;
-      padding: 10px;
-    }
-
-    .nav-links.active {
-      display: flex;
-    }
-  }
-</style>
-
-<script>
-  function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('active');
-  }
-</script>
