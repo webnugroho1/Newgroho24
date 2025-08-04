@@ -30,15 +30,13 @@
     header {
       background: var(--primary-color);
       color: var(--text-light);
-      text-align: center;
+      text-align: left;
       padding: 8px 10px;
     }
 
     header img {
       max-width: 160px;
       height: auto;
-      margin: 0 auto;
-      display: block;
     }
 
     nav {
@@ -47,9 +45,18 @@
       position: relative;
     }
 
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 960px;
+      margin: auto;
+      padding: 10px 20px;
+      flex-wrap: wrap;
+    }
+
     .menu-toggle {
       font-size: 1.5rem;
-      padding: 18px 20px;
       color: var(--text-light);
       background: none;
       border: none;
@@ -57,10 +64,6 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      position: absolute;
-      left: 10px;
-      top: 10px;
-      z-index: 9999;
     }
 
     .menu-text {
@@ -76,77 +79,28 @@
     }
 
     .nav-container {
-      max-width: 960px;
-      margin: auto;
       display: none;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 30px;
-      padding: 15px 20px;
-      background-color: #112b3c;
-      transition: max-height 0.3s ease;
+      align-items: flex-start;
+      gap: 20px;
+      width: 100%;
+      margin-top: 10px;
     }
 
     .nav-container.active {
       display: flex;
     }
 
-    .nav-container a,
-    .dropdown-btn {
+    .nav-container a {
       color: var(--text-light);
       text-decoration: none;
       font-weight: 600;
-      cursor: pointer;
       font-size: 1.2rem;
-      padding: 10px 5px;
+      padding: 5px 0;
     }
 
-    .nav-container a:hover,
-    .dropdown-btn:hover {
+    .nav-container a:hover {
       color: var(--accent-color);
-    }
-
-    .dropdown {
-      position: relative;
-      width: 100%;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: static;
-      width: 100%;
-      background-color: #0d1b2a;
-      border-top: 1px solid var(--accent-color);
-    }
-
-    .dropdown-content a {
-      display: block;
-      padding: 12px 18px;
-      color: var(--text-light);
-      text-decoration: none;
-      font-size: 1.1rem;
-    }
-
-    .dropdown-content a:hover {
-      background-color: var(--bg-dark);
-      color: var(--accent-color);
-    }
-
-    .dropdown.open .dropdown-content {
-      display: block;
-    }
-
-    .dropdown-btn::after {
-      content: "▼";
-      margin-left: 6px;
-      font-size: 0.75em;
-      transition: transform 0.3s ease;
-      display: inline-block;
-    }
-
-    .dropdown.open .dropdown-btn::after {
-      transform: rotate(180deg);
     }
 
     .hero {
@@ -214,30 +168,19 @@
 
     @media (min-width: 769px) {
       .nav-container {
-        flex-direction: row;
         display: flex !important;
-        background-color: transparent;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 0;
       }
 
       .menu-toggle {
         display: none;
       }
 
-      .dropdown {
-        width: auto;
-      }
-
-      .dropdown-content {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: auto;
-        border: 1px solid var(--accent-color);
-        display: none;
-      }
-
-      .dropdown.open .dropdown-content {
-        display: block;
+      .nav-container a {
+        padding: 10px 15px;
       }
     }
   </style>
@@ -249,22 +192,16 @@
   </header>
 
   <nav>
-    <button class="menu-toggle" onclick="toggleMenu()">
-      ☰ <span class="menu-text">MENU</span>
-    </button>
-
-    <div class="nav-container" id="navContainer">
-      <a href="#beranda">Beranda</a>
-      <div class="dropdown">
-        <span class="dropdown-btn">Layanan</span>
-        <div class="dropdown-content">
-          <a href="#layanan">Semua Layanan</a>
-          <a href="#">Signal Harian</a>
-          <a href="#">Analisa Pasar</a>
-          <a href="#">Webinar</a>
-        </div>
+    <div class="nav-inner">
+      <button class="menu-toggle" onclick="toggleMenu()">
+        ☰ <span class="menu-text">MENU</span>
+      </button>
+      <div class="nav-container" id="navContainer">
+        <a href="#beranda">Beranda</a>
+        <a href="#news">News</a>
+        <a href="#analisa">Analisa</a>
+        <a href="#personal">Personal</a>
       </div>
-      <a href="#kontak">Kontak</a>
     </div>
   </nav>
 
@@ -274,13 +211,19 @@
       <p>Platform terpercaya untuk investasi dan analisa pasar global</p>
     </section>
 
-    <section id="layanan">
-      <h2>Layanan Kami</h2>
-      <ul>
-        <li>Signal Trading Harian berbasis AI</li>
-        <li>Analisa Teknikal & Fundamental mendalam</li>
-        <li>Workshop & Webinar bersama trader ahli</li>
-      </ul>
+    <section id="news">
+      <h2>Berita Terbaru</h2>
+      <p>Belum ada berita saat ini.</p>
+    </section>
+
+    <section id="analisa">
+      <h2>Analisa Pasar</h2>
+      <p>Analisa teknikal dan fundamental akan ditampilkan di sini.</p>
+    </section>
+
+    <section id="personal">
+      <h2>Personal Area</h2>
+      <p>Silakan login untuk mengakses fitur personal Anda.</p>
     </section>
 
     <section id="kontak">
@@ -302,29 +245,6 @@
     function toggleMenu() {
       document.getElementById('navContainer').classList.toggle('active');
     }
-
-    function toggleDropdown(el) {
-      const dropdown = el.parentElement;
-      dropdown.classList.toggle('open');
-    }
-
-    window.addEventListener('click', function(e) {
-      document.querySelectorAll('.dropdown').forEach(drop => {
-        if (!drop.contains(e.target)) {
-          drop.classList.remove('open');
-        }
-      });
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-      const dropdownBtn = document.querySelector('.dropdown-btn');
-      if (dropdownBtn) {
-        dropdownBtn.addEventListener('click', function (e) {
-          e.stopPropagation();
-          toggleDropdown(this);
-        });
-      }
-    });
   </script>
 
 </body>
