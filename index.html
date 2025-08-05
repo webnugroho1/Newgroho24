@@ -223,7 +223,11 @@
 
     <section id="personal">
       <h2>Personal Area</h2>
-      <p>Silakan login untuk mengakses fitur personal Anda.</p>
+      <button id="loginBtn" onclick="loginWithGoogle()">Login dengan Gmail</button>
+      <div id="personal-content" style="display: none;">
+        <p>Selamat datang! Anda telah login menggunakan Gmail.</p>
+        <button onclick="logout()">Logout</button>
+      </div>
     </section>
 
     <section id="kontak">
@@ -241,11 +245,62 @@
     </div>
   </footer>
 
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+
   <script>
     function toggleMenu() {
       document.getElementById('navContainer').classList.toggle('active');
     }
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDAHxnYICpZWG7Xa4hYnw6UG-0jwGlgI2U",
+      authDomain: "web1-736eb.firebaseapp.com",
+      projectId: "web1-736eb",
+      storageBucket: "web1-736eb.firebasestorage.app",
+      messagingSenderId: "994652279612",
+      appId: "1:994652279612:web:ddbfd3bc81cdd65e2f4439",
+      measurementId: "G-MVGT87KGSN"
+    };
+
+    // Inisialisasi Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function loginWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .then((result) => {
+          const email = result.user.email;
+          if (email.endsWith("@gmail.com")) {
+            document.getElementById("personal-content").style.display = "block";
+            document.getElementById("loginBtn").style.display = "none";
+          } else {
+            alert("Hanya Gmail yang diperbolehkan.");
+            auth.signOut();
+          }
+        })
+        .catch((error) => {
+          console.error("Login error:", error);
+        });
+    }
+
+    function logout() {
+      auth.signOut().then(() => {
+        document.getElementById("personal-content").style.display = "none";
+        document.getElementById("loginBtn").style.display = "inline-block";
+      });
+    }
+
+    // Jika sudah login sebelumnya, langsung tampilkan konten
+    auth.onAuthStateChanged((user) => {
+      if (user && user.email.endsWith("@gmail.com")) {
+        document.getElementById("personal-content").style.display = "block";
+        document.getElementById("loginBtn").style.display = "none";
+      }
+    });
   </script>
 
 </body>
-        </html>
+</html>
