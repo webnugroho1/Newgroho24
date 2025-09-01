@@ -3,42 +3,102 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NEWGROHO24 | Beranda</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>NEWGROHO24 WEB</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      background: #f4f6f9;
+    }
+    .sidebar {
+      width: 220px;
+      background: #1e3a8a;
+      color: white;
+      height: 100vh;
+      position: fixed;
+      top: 0; left: 0;
+      padding: 20px 0;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar ul li {
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .sidebar ul li:hover {
+      background: #3b82f6;
+    }
+    .content {
+      margin-left: 220px;
+      padding: 20px;
+      flex: 1;
+    }
+    .hidden { display: none; }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #1e3a8a;
+      color: white;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <a href="index.html"><img src="images/logo.png" alt="Logo NEWGROHO24" /></a>
-  </header>
+  <div class="sidebar">
+    <h2>NEWGROHO24</h2>
+    <ul>
+      <li onclick="showPage('beranda')">Beranda</li>
+      <li onclick="showPage('news')">News</li>
+      <li onclick="showPage('analisa')">Analisa</li>
+      <li onclick="showPage('personal')">Personal</li>
+      <li onclick="showPage('kontak')">Kontak</li>
+    </ul>
+  </div>
 
-  <nav>
-    <div class="nav-inner">
-      <button class="menu-toggle" onclick="toggleMenu()">☰ <span class="menu-text">MENU</span></button>
-      <div class="nav-container" id="navContainer">
-        <a href="index.html" class="active">Beranda</a>
-        <a href="news.html">News</a>
-        <a href="analisa.html">Analisa</a>
-        <a href="personal.html">Personal</a>
-        <a href="kontak.html">Kontak</a>
-      </div>
+  <div class="content">
+    <div id="beranda" class="page">
+      <h1>Selamat Datang di NEWGROHO24 Web</h1>
+      <p>Website pembelajaran dengan tema biru putih elegan.</p>
     </div>
-  </nav>
 
-  <main>
-    <section class="hero">
-      <h2>Solusi Trading Masa Depan</h2>
-      <p>Platform terpercaya untuk investasi dan analisa pasar global</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 NEWGROHO24. All rights reserved.</p>
-    <div class="social-icons">
-      <a href="https://wa.me/6281234567890" target="_blank">📱</a>
-      <a href="https://instagram.com/newgroho24" target="_blank">📸</a>
+    <div id="news" class="page hidden">
+      <h1>News</h1>
+      <p>Berita terbaru akan tampil di sini.</p>
     </div>
-  </footer>
 
-  <script src="js/app.js"></script>
+    <div id="analisa" class="page hidden">
+      <h1>Analisa</h1>
+      <p>Konten analisa akan ditampilkan di sini.</p>
+    </div>
+
+    <div id="personal" class="page hidden">
+      <h1>Personal</h1>
+      <p>Halaman personal branding NEWGROHO24.</p>
+    </div>
+
+    <div id="kontak" class="page hidden">
+      <h1>Kontak</h1>
+      <p>WA/SMS/CALL: <b>085158988924</b></p>
+    </div>
+
+    <footer>
+      &copy; 2025 NEWGROHO24
+    </footer>
+  </div>
+
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+      document.getElementById(pageId).classList.remove('hidden');
+    }
+  </script>
 </body>
 </html>
