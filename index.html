@@ -4,236 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NEWGROHO24 | Beranda</title>
-  <style>
-    :root {
-      --primary-color: #0d1b2a;
-      --accent-color: #1b9aaa;
-      --text-light: #f0f0f0;
-      --text-dark: #333;
-      --bg-light: #ffffff;
-      --bg-dark: #1b263b;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-light);
-      color: var(--text-dark);
-      line-height: 1.6;
-    }
-
-    header {
-      background: var(--primary-color);
-      color: var(--text-light);
-      text-align: left;
-      padding: 8px 10px;
-    }
-
-    header img {
-      max-width: 160px;
-      height: auto;
-    }
-
-    nav {
-      background-color: #112b3c;
-      border-top: 3px solid var(--accent-color);
-      position: relative;
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 960px;
-      margin: auto;
-      padding: 10px 20px;
-      flex-wrap: wrap;
-    }
-
-    .menu-toggle {
-      font-size: 1.5rem;
-      color: var(--text-light);
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .menu-text {
-      animation: blink 1s infinite;
-      color: var(--accent-color);
-      font-weight: bold;
-      font-size: 1.3rem;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.2; }
-    }
-
-    .nav-container {
-      display: none;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 20px;
-      width: 100%;
-      margin-top: 10px;
-    }
-
-    .nav-container.active {
-      display: flex;
-    }
-
-    .nav-container a {
-      color: var(--text-light);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.2rem;
-      padding: 5px 0;
-    }
-
-    .nav-container a:hover {
-      color: var(--accent-color);
-    }
-
-    .hero {
-      background: linear-gradient(to right, #0d1b2a, #1b263b);
-      color: white;
-      text-align: center;
-      padding: 90px 20px;
-    }
-
-    .hero h2 {
-      font-size: 2.5rem;
-      margin-bottom: 12px;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    }
-
-    .hero p {
-      font-size: 1.1rem;
-      color: #d3e0ea;
-    }
-
-    section {
-      padding: 50px 20px;
-      max-width: 960px;
-      margin: auto;
-    }
-
-    section h2 {
-      color: var(--primary-color);
-      margin-bottom: 20px;
-      font-size: 1.8rem;
-      border-bottom: 2px solid var(--accent-color);
-      padding-bottom: 5px;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    ul li {
-      margin-bottom: 8px;
-    }
-
-    footer {
-      background-color: var(--primary-color);
-      color: #ccc;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-    }
-
-    footer .social-icons a {
-      color: var(--accent-color);
-      margin: 0 10px;
-      font-size: 1.3rem;
-      text-decoration: none;
-    }
-
-    a {
-      color: var(--accent-color);
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    @media (min-width: 769px) {
-      .nav-container {
-        display: flex !important;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        margin-top: 0;
-      }
-
-      .menu-toggle {
-        display: none;
-      }
-
-      .nav-container a {
-        padding: 10px 15px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-
   <header>
-    <img src="images/logo.png" alt="Logo NEWGROHO24" />
+    <a href="index.html"><img src="images/logo.png" alt="Logo NEWGROHO24" /></a>
   </header>
 
   <nav>
     <div class="nav-inner">
-      <button class="menu-toggle" onclick="toggleMenu()">
-        ☰ <span class="menu-text">MENU</span>
-      </button>
+      <button class="menu-toggle" onclick="toggleMenu()">☰ <span class="menu-text">MENU</span></button>
       <div class="nav-container" id="navContainer">
-        <a href="#beranda">Beranda</a>
-        <a href="#news">News</a>
-        <a href="#analisa">Analisa</a>
-        <a href="#personal">Personal</a>
+        <a href="index.html" class="active">Beranda</a>
+        <a href="news.html">News</a>
+        <a href="analisa.html">Analisa</a>
+        <a href="personal.html">Personal</a>
+        <a href="kontak.html">Kontak</a>
       </div>
     </div>
   </nav>
 
   <main>
-    <section id="beranda" class="hero">
+    <section class="hero">
       <h2>Solusi Trading Masa Depan</h2>
       <p>Platform terpercaya untuk investasi dan analisa pasar global</p>
-    </section>
-
-    <section id="news">
-      <h2>Berita Terbaru</h2>
-      <p>Belum ada berita saat ini.</p>
-    </section>
-
-    <section id="analisa">
-      <h2>Analisa Pasar</h2>
-      <p>Analisa teknikal dan fundamental akan ditampilkan di sini.</p>
-    </section>
-
-    <section id="personal">
-      <h2>Personal Area</h2>
-      <button id="loginBtn" onclick="loginWithGoogle()">Login dengan Gmail</button>
-      <div id="personal-content" style="display: none;">
-        <p>Selamat datang! Anda telah login menggunakan Gmail.</p>
-        <button onclick="logout()">Logout</button>
-      </div>
-    </section>
-
-    <section id="kontak">
-      <h2>Hubungi Kami</h2>
-      <p>Email: <a href="mailto:info@newgroho24.com">info@newgroho24.com</a></p>
-      <p>WhatsApp: <a href="https://wa.me/6281234567890" target="_blank">+62 812-3456-7890</a></p>
     </section>
   </main>
 
@@ -245,62 +39,6 @@
     </div>
   </footer>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
-
-  <script>
-    function toggleMenu() {
-      document.getElementById('navContainer').classList.toggle('active');
-    }
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDAHxnYICpZWG7Xa4hYnw6UG-0jwGlgI2U",
-      authDomain: "web1-736eb.firebaseapp.com",
-      projectId: "web1-736eb",
-      storageBucket: "web1-736eb.firebasestorage.app",
-      messagingSenderId: "994652279612",
-      appId: "1:994652279612:web:ddbfd3bc81cdd65e2f4439",
-      measurementId: "G-MVGT87KGSN"
-    };
-
-    // Inisialisasi Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-
-    function loginWithGoogle() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider)
-        .then((result) => {
-          const email = result.user.email;
-          if (email.endsWith("@gmail.com")) {
-            document.getElementById("personal-content").style.display = "block";
-            document.getElementById("loginBtn").style.display = "none";
-          } else {
-            alert("Hanya Gmail yang diperbolehkan.");
-            auth.signOut();
-          }
-        })
-        .catch((error) => {
-          console.error("Login error:", error);
-        });
-    }
-
-    function logout() {
-      auth.signOut().then(() => {
-        document.getElementById("personal-content").style.display = "none";
-        document.getElementById("loginBtn").style.display = "inline-block";
-      });
-    }
-
-    // Jika sudah login sebelumnya, langsung tampilkan konten
-    auth.onAuthStateChanged((user) => {
-      if (user && user.email.endsWith("@gmail.com")) {
-        document.getElementById("personal-content").style.display = "block";
-        document.getElementById("loginBtn").style.display = "none";
-      }
-    });
-  </script>
-
+  <script src="js/app.js"></script>
 </body>
 </html>
