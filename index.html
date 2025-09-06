@@ -8,65 +8,124 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      background: #0f0f0f;
+      color: #e5e5e5;
       display: flex;
-      background: #f4f6f9;
     }
+
+    /* Sidebar */
     .sidebar {
-      width: 220px;
-      background: #1e3a8a;
+      width: 240px;
+      background: #000;
       color: white;
       height: 100vh;
       position: fixed;
-      top: 0; left: 0;
-      padding: 20px 0;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
     }
+
     .sidebar h2 {
       text-align: center;
-      margin-bottom: 20px;
+      color: #fcd535;
+      padding: 20px 0;
+      margin: 0;
+      border-bottom: 1px solid #222;
     }
+
     .sidebar ul {
       list-style: none;
       padding: 0;
+      margin: 0;
+      flex: 1;
+      overflow-y: auto;
     }
+
     .sidebar ul li {
-      padding: 12px 20px;
+      padding: 15px 20px;
       cursor: pointer;
-      transition: background 0.3s;
+      border-bottom: 1px solid #111;
+      transition: background 0.3s, padding-left 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
+
     .sidebar ul li:hover {
-      background: #3b82f6;
+      background: #1a1a1a;
+      color: #fcd535;
     }
-    .content {
-      margin-left: 220px;
-      padding: 20px;
+
+    .sidebar ul li .label {
       flex: 1;
     }
-    .hidden { display: none; }
+
+    /* Submenu */
+    .submenu {
+      display: none;
+      flex-direction: column;
+      background: #111;
+    }
+
+    .submenu li {
+      padding: 12px 40px;
+      font-size: 14px;
+      border-bottom: none;
+    }
+
+    .submenu li:hover {
+      background: #222;
+    }
+
+    /* Content */
+    .content {
+      margin-left: 240px;
+      padding: 30px;
+      flex: 1;
+      background: #181818;
+      min-height: 100vh;
+    }
+
+    .content h1 {
+      color: #fcd535;
+    }
+
+    /* Footer */
     footer {
       text-align: center;
       padding: 15px;
-      background: #1e3a8a;
-      color: white;
+      background: #000;
+      color: #fcd535;
       margin-top: 20px;
     }
+
+    .hidden { display: none; }
   </style>
 </head>
 <body>
   <div class="sidebar">
     <h2>NEWGROHO24</h2>
     <ul>
-      <li onclick="showPage('beranda')">Beranda</li>
-      <li onclick="showPage('news')">News</li>
-      <li onclick="showPage('analisa')">Analisa</li>
-      <li onclick="showPage('personal')">Personal</li>
-      <li onclick="showPage('kontak')">Kontak</li>
+      <li onclick="showPage('beranda')"><span class="label">🏠 Beranda</span></li>
+      <li onclick="showPage('news')"><span class="label">📰 News</span></li>
+      <li onclick="showPage('analisa')"><span class="label">📊 Analisa</span></li>
+      <li onclick="showPage('personal')"><span class="label">👤 Personal</span></li>
+      <li onclick="toggleSubmenu(this)">
+        <span class="label">🔑 Akun</span> ▼
+      </li>
+      <ul class="submenu">
+        <li onclick="showPage('login')">Login</li>
+        <li onclick="showPage('register')">Registrasi</li>
+      </ul>
+      <li onclick="showPage('kontak')"><span class="label">☎️ Kontak</span></li>
     </ul>
   </div>
 
   <div class="content">
     <div id="beranda" class="page">
       <h1>Selamat Datang di NEWGROHO24 Web</h1>
-      <p>Website pembelajaran dengan tema biru putih elegan.</p>
+      <p>Website pembelajaran dengan tema hitam emas elegan.</p>
     </div>
 
     <div id="news" class="page hidden">
@@ -84,6 +143,16 @@
       <p>Halaman personal branding NEWGROHO24.</p>
     </div>
 
+    <div id="login" class="page hidden">
+      <h1>Login</h1>
+      <p>Form login akan ditaruh di sini.</p>
+    </div>
+
+    <div id="register" class="page hidden">
+      <h1>Registrasi</h1>
+      <p>Form registrasi akan ditaruh di sini.</p>
+    </div>
+
     <div id="kontak" class="page hidden">
       <h1>Kontak</h1>
       <p>WA/SMS/CALL: <b>085158988924</b></p>
@@ -98,6 +167,11 @@
     function showPage(pageId) {
       document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
       document.getElementById(pageId).classList.remove('hidden');
+    }
+
+    function toggleSubmenu(el) {
+      let submenu = el.nextElementSibling;
+      submenu.style.display = submenu.style.display === "flex" ? "none" : "flex";
     }
   </script>
 </body>
