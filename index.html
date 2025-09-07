@@ -39,13 +39,16 @@
       margin: 0;
       border-bottom: 1px solid #222;
       white-space: nowrap;
-      overflow: hidden;
+      overflow: visible;   /* biar huruf N tidak kepotong */
+      text-overflow: clip;
       transition: opacity 0.3s ease;
     }
 
+    /* Kalau mau judul hilang saat collapsed, aktifkan ini 
     .sidebar.collapsed h2 {
       opacity: 0;
     }
+    */
 
     .sidebar ul {
       list-style: none;
@@ -219,4 +222,4 @@
     }
   </script>
 </body>
-</html>
+  </html>
