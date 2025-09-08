@@ -13,67 +13,65 @@
       display: flex;
     }
 
+    /* Tombol toggle di luar sidebar */
+    .toggle-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background: #fcd535;
+      color: #000;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      z-index: 1001;
+    }
+
     /* Sidebar */
     .sidebar {
-      width: 200px; /* lebih ramping */
+      width: 220px;
       background: #000;
       color: white;
       height: 100vh;
       position: fixed;
       top: 0;
       left: 0;
-      display: flex;
-      flex-direction: column;
-      transition: width 0.3s ease;
-      overflow: hidden;
+      transform: translateX(0);
+      transition: transform 0.3s ease;
+      overflow-y: auto;
+      z-index: 1000;
+      padding-top: 60px; /* biar tidak tabrakan tombol */
     }
 
-    .sidebar.collapsed {
-      width: 70px;
+    .sidebar.hidden {
+      transform: translateX(-100%);
     }
 
     .sidebar h2 {
-      text-align: center;
       color: #fcd535;
-      padding: 20px 0;
+      text-align: center;
       margin: 0;
+      padding: 15px 0;
       border-bottom: 1px solid #222;
-      white-space: nowrap;
-      overflow: visible;
-      text-overflow: clip;
-      transition: opacity 0.3s ease;
     }
 
     .sidebar ul {
       list-style: none;
       padding: 0;
       margin: 0;
-      flex: 1;
-      overflow-y: auto;
     }
 
     .sidebar ul li {
       padding: 15px 20px;
       cursor: pointer;
       border-bottom: 1px solid #111;
-      transition: background 0.3s, padding-left 0.3s;
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
+      transition: background 0.3s;
     }
 
     .sidebar ul li:hover {
       background: #1a1a1a;
       color: #fcd535;
-    }
-
-    .sidebar ul li .label {
-      margin-left: 10px;
-      transition: opacity 0.3s ease;
-    }
-
-    .sidebar.collapsed .label {
-      opacity: 0;
     }
 
     /* Submenu */
@@ -95,7 +93,7 @@
 
     /* Content */
     .content {
-      margin-left: 200px;
+      margin-left: 220px;
       padding: 30px;
       flex: 1;
       background: #181818;
@@ -103,28 +101,12 @@
       transition: margin-left 0.3s ease;
     }
 
-    .content.expanded {
-      margin-left: 70px;
+    .sidebar.hidden ~ .content {
+      margin-left: 0;
     }
 
     .content h1 {
       color: #fcd535;
-    }
-
-    /* Toggle button */
-    .toggle-btn {
-      position: fixed;
-      top: 15px;
-      left: 210px; /* posisinya pas di samping sidebar */
-      font-size: 20px;
-      cursor: pointer;
-      background: #fcd535;
-      color: #000;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 4px;
-      z-index: 1000;
-      transition: left 0.3s ease;
     }
 
     /* Footer */
@@ -136,7 +118,7 @@
       margin-top: 20px;
     }
 
-    .hidden { display: none; }
+    .hidden-page { display: none; }
 
     /* Styling berita */
     #list-berita {
@@ -158,55 +140,59 @@
   </style>
 </head>
 <body>
+  <!-- Tombol toggle -->
   <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+
+  <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <h2>NEWGROHO24</h2>
     <ul>
-      <li onclick="showPage('beranda')">🏠 <span class="label">Beranda</span></li>
-      <li onclick="showPage('news')">📰 <span class="label">News</span></li>
-      <li onclick="showPage('analisa')">📊 <span class="label">Analisa</span></li>
-      <li onclick="showPage('personal')">👤 <span class="label">Personal</span></li>
-      <li onclick="toggleSubmenu(this)">🔑 <span class="label">Akun ▼</span></li>
+      <li onclick="showPage('beranda')">🏠 Beranda</li>
+      <li onclick="showPage('news')">📰 News</li>
+      <li onclick="showPage('analisa')">📊 Analisa</li>
+      <li onclick="showPage('personal')">👤 Personal</li>
+      <li onclick="toggleSubmenu(this)">🔑 Akun ▼</li>
       <ul class="submenu">
         <li onclick="showPage('login')">Login</li>
         <li onclick="showPage('register')">Registrasi</li>
       </ul>
-      <li onclick="showPage('kontak')">☎️ <span class="label">Kontak</span></li>
+      <li onclick="showPage('kontak')">☎️ Kontak</li>
     </ul>
   </div>
 
+  <!-- Konten -->
   <div class="content" id="content">
     <div id="beranda" class="page">
       <h1>Selamat Datang di NEWGROHO24 Web</h1>
       <p>Website pembelajaran dengan tema hitam emas elegan.</p>
     </div>
 
-    <div id="news" class="page hidden">
+    <div id="news" class="page hidden-page">
       <h1>News</h1>
       <div id="list-berita"></div>
     </div>
 
-    <div id="analisa" class="page hidden">
+    <div id="analisa" class="page hidden-page">
       <h1>Analisa</h1>
       <p>Konten analisa akan ditampilkan di sini.</p>
     </div>
 
-    <div id="personal" class="page hidden">
+    <div id="personal" class="page hidden-page">
       <h1>Personal</h1>
       <p>Halaman personal branding NEWGROHO24.</p>
     </div>
 
-    <div id="login" class="page hidden">
+    <div id="login" class="page hidden-page">
       <h1>Login</h1>
       <p>Form login akan ditaruh di sini.</p>
     </div>
 
-    <div id="register" class="page hidden">
+    <div id="register" class="page hidden-page">
       <h1>Registrasi</h1>
       <p>Form registrasi akan ditaruh di sini.</p>
     </div>
 
-    <div id="kontak" class="page hidden">
+    <div id="kontak" class="page hidden-page">
       <h1>Kontak</h1>
       <p>WA/SMS/CALL: <b>085158988924</b></p>
     </div>
@@ -218,8 +204,8 @@
 
   <script>
     function showPage(pageId) {
-      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
-      document.getElementById(pageId).classList.remove('hidden');
+      document.querySelectorAll('.page').forEach(p => p.classList.add('hidden-page'));
+      document.getElementById(pageId).classList.remove('hidden-page');
     }
 
     function toggleSubmenu(el) {
@@ -229,17 +215,7 @@
 
     function toggleSidebar() {
       let sidebar = document.getElementById("sidebar");
-      let content = document.getElementById("content");
-      let toggleBtn = document.querySelector(".toggle-btn");
-
-      sidebar.classList.toggle("collapsed");
-      content.classList.toggle("expanded");
-
-      if (sidebar.classList.contains("collapsed")) {
-        toggleBtn.style.left = "80px"; // posisi kalau sidebar collapse
-      } else {
-        toggleBtn.style.left = "210px"; // posisi normal
-      }
+      sidebar.classList.toggle("hidden");
     }
 
     // Ambil berita dari berita.json
