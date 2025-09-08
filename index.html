@@ -13,11 +13,18 @@
       display: flex;
     }
 
-    /* Tombol toggle di luar sidebar */
-    .toggle-btn {
+    /* Tombol toggle */
+    .toggle-wrapper {
       position: fixed;
       top: 15px;
       left: 15px;
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .toggle-btn {
       background: #fcd535;
       color: #000;
       border: none;
@@ -25,7 +32,20 @@
       border-radius: 5px;
       cursor: pointer;
       font-size: 18px;
-      z-index: 1001;
+    }
+
+    /* Teks slide berkedip */
+    .slide-hint {
+      font-size: 12px;
+      color: red;
+      text-transform: lowercase;
+      font-weight: bold;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0; }
     }
 
     /* Sidebar */
@@ -140,8 +160,11 @@
   </style>
 </head>
 <body>
-  <!-- Tombol toggle -->
-  <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+  <!-- Tombol toggle + teks slide -->
+  <div class="toggle-wrapper">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <span class="slide-hint">slide</span>
+  </div>
 
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
