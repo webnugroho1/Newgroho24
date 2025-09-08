@@ -15,7 +15,7 @@
 
     /* Sidebar */
     .sidebar {
-      width: 240px;
+      width: 200px; /* lebih ramping */
       background: #000;
       color: white;
       height: 100vh;
@@ -95,7 +95,7 @@
 
     /* Content */
     .content {
-      margin-left: 240px;
+      margin-left: 200px;
       padding: 30px;
       flex: 1;
       background: #181818;
@@ -115,7 +115,7 @@
     .toggle-btn {
       position: fixed;
       top: 15px;
-      left: 15px;
+      left: 210px; /* posisinya pas di samping sidebar */
       font-size: 20px;
       cursor: pointer;
       background: #fcd535;
@@ -124,6 +124,7 @@
       padding: 8px 12px;
       border-radius: 4px;
       z-index: 1000;
+      transition: left 0.3s ease;
     }
 
     /* Footer */
@@ -229,8 +230,16 @@
     function toggleSidebar() {
       let sidebar = document.getElementById("sidebar");
       let content = document.getElementById("content");
+      let toggleBtn = document.querySelector(".toggle-btn");
+
       sidebar.classList.toggle("collapsed");
       content.classList.toggle("expanded");
+
+      if (sidebar.classList.contains("collapsed")) {
+        toggleBtn.style.left = "80px"; // posisi kalau sidebar collapse
+      } else {
+        toggleBtn.style.left = "210px"; // posisi normal
+      }
     }
 
     // Ambil berita dari berita.json
