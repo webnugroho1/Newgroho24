@@ -21,7 +21,7 @@
       z-index: 1001;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .toggle-btn {
@@ -34,13 +34,21 @@
       font-size: 18px;
     }
 
-    /* Teks slide berkedip */
+    /* Teks slide berkedip + panah */
     .slide-hint {
-      font-size: 12px;
+      font-size: 16px;
       color: red;
       text-transform: lowercase;
       font-weight: bold;
       animation: blink 1s infinite;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .slide-hint::after {
+      content: "➡️";
+      font-size: 18px;
     }
 
     @keyframes blink {
@@ -61,7 +69,7 @@
       transition: transform 0.3s ease;
       overflow-y: auto;
       z-index: 1000;
-      padding-top: 60px; /* biar tidak tabrakan tombol */
+      padding-top: 60px;
     }
 
     .sidebar.hidden {
@@ -260,4 +268,4 @@
       .catch(error => console.error("Gagal load berita:", error));
   </script>
 </body>
-</html>
+      </html>
