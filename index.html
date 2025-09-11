@@ -19,9 +19,6 @@
       top: 15px;
       left: 15px;
       z-index: 1001;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
     .toggle-btn {
@@ -31,43 +28,7 @@
       padding: 8px 12px;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 18px;
-    }
-
-    /* Panah animasi */
-    .slide-hint {
-      display: flex;
-      gap: 10px;
-    }
-
-    /* Default panah biru kanan */
-    .arrow {
-      width: 0;
-      height: 0;
-      border-top: 10px solid transparent;
-      border-bottom: 10px solid transparent;
-      border-left: 18px solid #00aaff;
-      filter: drop-shadow(0 0 6px #00ccff);
-      opacity: 0.2;
-      animation: arrow-run 1.2s infinite;
-    }
-
-    /* Panah merah kiri */
-    .arrow.left {
-      border-left: none;
-      border-right: 18px solid #ff4444;
-      filter: drop-shadow(0 0 6px #ff4444);
-    }
-
-    .arrow:nth-child(1) { animation-delay: 0s; }
-    .arrow:nth-child(2) { animation-delay: 0.25s; }
-    .arrow:nth-child(3) { animation-delay: 0.5s; }
-
-    @keyframes arrow-run {
-      0%   { opacity: 0.2; transform: translateX(0); }
-      40%  { opacity: 1;   transform: translateX(3px); }
-      80%  { opacity: 0.6; transform: translateX(6px); }
-      100% { opacity: 0.2; transform: translateX(0); }
+      font-size: 20px;
     }
 
     /* Sidebar */
@@ -182,14 +143,9 @@
   </style>
 </head>
 <body>
-  <!-- Tombol toggle + panah animasi -->
+  <!-- Tombol toggle -->
   <div class="toggle-wrapper">
-    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-    <div class="slide-hint">
-      <div class="arrow"></div>
-      <div class="arrow"></div>
-      <div class="arrow"></div>
-    </div>
+    <button class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()">🗕</button>
   </div>
 
   <!-- Sidebar -->
@@ -252,23 +208,9 @@
   </div>
 
   <script>
-    function updateArrowDirection(isBeranda) {
-      const arrows = document.querySelectorAll(".arrow");
-      arrows.forEach(arrow => {
-        if (isBeranda) {
-          arrow.classList.add("left");
-        } else {
-          arrow.classList.remove("left");
-        }
-      });
-    }
-
     function showPage(pageId) {
       document.querySelectorAll('.page').forEach(p => p.classList.add('hidden-page'));
       document.getElementById(pageId).classList.remove('hidden-page');
-
-      // Update panah sesuai halaman
-      updateArrowDirection(pageId === "beranda");
     }
 
     function toggleSubmenu(el) {
@@ -278,18 +220,16 @@
 
     function toggleSidebar() {
       let sidebar = document.getElementById("sidebar");
+      let toggleBtn = document.getElementById("toggleBtn");
+
       sidebar.classList.toggle("hidden");
 
-      // Jika sidebar disembunyikan, panah kembali biru kanan
       if (sidebar.classList.contains("hidden")) {
-        updateArrowDirection(false);
+        toggleBtn.textContent = "⛶"; // maximize
+      } else {
+        toggleBtn.textContent = "🗕"; // minimize
       }
     }
-
-    // Set panah default di halaman awal (beranda)
-    document.addEventListener("DOMContentLoaded", () => {
-      updateArrowDirection(true);
-    });
 
     // Ambil berita dari berita.json
     fetch("berita.json")
