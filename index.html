@@ -34,12 +34,13 @@
       font-size: 18px;
     }
 
-    /* Panah animasi bentuk segitiga */
+    /* Panah animasi */
     .slide-hint {
       display: flex;
       gap: 10px;
     }
 
+    /* Default panah biru kanan */
     .arrow {
       width: 0;
       height: 0;
@@ -49,6 +50,13 @@
       filter: drop-shadow(0 0 6px #00ccff);
       opacity: 0.2;
       animation: arrow-run 1.2s infinite;
+    }
+
+    /* Panah merah kiri */
+    .arrow.left {
+      border-left: none;
+      border-right: 18px solid #ff4444;
+      filter: drop-shadow(0 0 6px #ff4444);
     }
 
     .arrow:nth-child(1) { animation-delay: 0s; }
@@ -244,9 +252,23 @@
   </div>
 
   <script>
+    function updateArrowDirection(isBeranda) {
+      const arrows = document.querySelectorAll(".arrow");
+      arrows.forEach(arrow => {
+        if (isBeranda) {
+          arrow.classList.add("left");
+        } else {
+          arrow.classList.remove("left");
+        }
+      });
+    }
+
     function showPage(pageId) {
       document.querySelectorAll('.page').forEach(p => p.classList.add('hidden-page'));
       document.getElementById(pageId).classList.remove('hidden-page');
+
+      // Update panah sesuai halaman
+      updateArrowDirection(pageId === "beranda");
     }
 
     function toggleSubmenu(el) {
@@ -257,7 +279,17 @@
     function toggleSidebar() {
       let sidebar = document.getElementById("sidebar");
       sidebar.classList.toggle("hidden");
+
+      // Jika sidebar disembunyikan, panah kembali biru kanan
+      if (sidebar.classList.contains("hidden")) {
+        updateArrowDirection(false);
+      }
     }
+
+    // Set panah default di halaman awal (beranda)
+    document.addEventListener("DOMContentLoaded", () => {
+      updateArrowDirection(true);
+    });
 
     // Ambil berita dari berita.json
     fetch("berita.json")
@@ -278,4 +310,4 @@
       .catch(error => console.error("Gagal load berita:", error));
   </script>
 </body>
-  </html>
+</html>
