@@ -19,6 +19,9 @@
       top: 15px;
       left: 15px;
       z-index: 1001;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .toggle-btn {
@@ -28,7 +31,35 @@
       padding: 8px 12px;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 20px;
+      font-size: 18px;
+    }
+
+    /* Panah animasi bentuk segitiga */
+    .slide-hint {
+      display: flex;
+      gap: 10px;
+    }
+
+    .arrow {
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 18px solid #00aaff;
+      filter: drop-shadow(0 0 6px #00ccff);
+      opacity: 0.2;
+      animation: arrow-run 1.2s infinite;
+    }
+
+    .arrow:nth-child(1) { animation-delay: 0s; }
+    .arrow:nth-child(2) { animation-delay: 0.25s; }
+    .arrow:nth-child(3) { animation-delay: 0.5s; }
+
+    @keyframes arrow-run {
+      0%   { opacity: 0.2; transform: translateX(0); }
+      40%  { opacity: 1;   transform: translateX(3px); }
+      80%  { opacity: 0.6; transform: translateX(6px); }
+      100% { opacity: 0.2; transform: translateX(0); }
     }
 
     /* Sidebar */
@@ -112,6 +143,27 @@
       color: #fcd535;
     }
 
+    /* Tombol max/min di antara sidebar & content */
+    .resizer-btn {
+      position: fixed;
+      top: 50%;
+      left: 220px;
+      transform: translateY(-50%);
+      background: #fcd535;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      z-index: 1002;
+      transition: left 0.3s ease;
+    }
+
+    .sidebar.hidden ~ .resizer-btn {
+      left: 0;
+      border-radius: 5px 0 0 5px;
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -143,9 +195,14 @@
   </style>
 </head>
 <body>
-  <!-- Tombol toggle -->
+  <!-- Tombol toggle + panah animasi -->
   <div class="toggle-wrapper">
-    <button class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()">🗕</button>
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <div class="slide-hint">
+      <div class="arrow"></div>
+      <div class="arrow"></div>
+      <div class="arrow"></div>
+    </div>
   </div>
 
   <!-- Sidebar -->
@@ -164,6 +221,9 @@
       <li onclick="showPage('kontak')">☎️ Kontak</li>
     </ul>
   </div>
+
+  <!-- Tombol max/min -->
+  <button class="resizer-btn" onclick="toggleSidebar()">⮌</button>
 
   <!-- Konten -->
   <div class="content" id="content">
@@ -220,15 +280,7 @@
 
     function toggleSidebar() {
       let sidebar = document.getElementById("sidebar");
-      let toggleBtn = document.getElementById("toggleBtn");
-
       sidebar.classList.toggle("hidden");
-
-      if (sidebar.classList.contains("hidden")) {
-        toggleBtn.textContent = "⛶"; // maximize
-      } else {
-        toggleBtn.textContent = "🗕"; // minimize
-      }
     }
 
     // Ambil berita dari berita.json
@@ -250,4 +302,4 @@
       .catch(error => console.error("Gagal load berita:", error));
   </script>
 </body>
-</html>
+      </html>
