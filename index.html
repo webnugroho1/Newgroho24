@@ -15,10 +15,34 @@
       min-height: 100vh;
     }
 
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(90deg, #fcd535, #b8860b, #000); /* emas → hitam */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      z-index: 1003;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+      color: #fff; /* putih agar kontras */
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
     /* Tombol menu (pojok kiri atas) */
     .menu-btn {
       position: fixed;
-      top: 15px;
+      top: 12px;
       left: 15px;
       background: #007bff;
       color: #fff;
@@ -27,7 +51,7 @@
       border-radius: 6px;
       font-size: 20px;
       cursor: pointer;
-      z-index: 1002;
+      z-index: 1004;
     }
 
     /* Sidebar */
@@ -38,16 +62,14 @@
       height: 100vh;
       position: fixed;
       top: 0;
-      left: -220px; /* sembunyi */
+      left: -220px;
       transition: left 0.3s ease;
       overflow-y: auto;
-      z-index: 1001;
+      z-index: 1002;
       padding-top: 60px;
     }
 
-    .sidebar.show {
-      left: 0;
-    }
+    .sidebar.show { left: 0; }
 
     .sidebar h2 {
       color: #fcd535;
@@ -75,7 +97,7 @@
       color: #fcd535;
     }
 
-    /* Overlay (untuk menutup sidebar) */
+    /* Overlay */
     .overlay {
       display: none;
       position: fixed;
@@ -87,40 +109,29 @@
       z-index: 1000;
     }
 
-    .overlay.show {
-      display: block;
-    }
+    .overlay.show { display: block; }
 
     /* Konten */
     .content {
-      padding: 30px;
+      padding: 90px 30px 30px;
       background: #181818;
-      flex: 1; /* supaya footer terdorong ke bawah */
+      flex: 1;
     }
 
-    .content h1 {
-      color: #fcd535;
-    }
+    .content h1 { color: #fcd535; }
 
     .hidden-page { display: none; }
 
     /* Styling berita */
-    #list-berita {
-      margin-top: 20px;
-    }
+    #list-berita { margin-top: 20px; }
     .berita-item {
       background: #222;
       padding: 15px;
       border-radius: 8px;
       margin-bottom: 15px;
     }
-    .berita-item h2 {
-      margin: 0;
-      color: #fcd535;
-    }
-    .berita-item small {
-      color: #aaa;
-    }
+    .berita-item h2 { margin: 0; color: #fcd535; }
+    .berita-item small { color: #aaa; }
 
     /* Footer */
     footer {
@@ -128,17 +139,22 @@
       padding: 15px;
       background: #000;
       color: #fcd535;
-      margin-top: auto; /* selalu di bawah */
+      margin-top: auto;
     }
   </style>
 </head>
 <body>
+  <!-- Header -->
+  <header>
+    <h1>NEWGROHO24 WEB</h1>
+  </header>
+
   <!-- Tombol menu -->
   <button class="menu-btn" onclick="toggleSidebar()">☰</button>
 
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
-    <h2>NEWGROHO24</h2>
+    <h2>Menu</h2>
     <ul>
       <li onclick="showPage('beranda')">🏠 Beranda</li>
       <li onclick="showPage('news')">📰 News</li>
@@ -187,7 +203,7 @@
     function showPage(pageId) {
       document.querySelectorAll('.page').forEach(p => p.classList.add('hidden-page'));
       document.getElementById(pageId).classList.remove('hidden-page');
-      toggleSidebar(); // otomatis tutup sidebar setelah klik menu
+      toggleSidebar();
     }
 
     function toggleSidebar() {
