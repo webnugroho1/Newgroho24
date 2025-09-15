@@ -253,14 +253,20 @@
       overlay.classList.toggle("show");
     }
 
-    // === Ambil berita dari beberapa RSS ===
+    // === Ambil berita dari RSS via AllOrigins ===
     const rssFeeds = [
       "https://www.cnbcindonesia.com/rss",
       "https://rss.kontan.co.id/news/finansial",
       "https://www.investing.com/rss/news_25.rss"
     ];
 
-    const keywords = ["emas", "gold", "dollar", "usd", "forex", "trading", "saham", "crypto", "ekonomi", "keuangan"];
+    // Kata kunci fokus ke trading
+    const keywords = [
+      "xauusd", "emas", "gold",
+      "forex", "usd", "dollar",
+      "the fed", "federal reserve",
+      "crypto", "bitcoin", "ethereum", "altcoin"
+    ];
 
     async function loadNews() {
       const container = document.getElementById("list-berita");
@@ -269,18 +275,29 @@
       try {
         let allItems = [];
 
-        // Ambil semua feed
         for (let url of rssFeeds) {
-          const apiUrl = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(url);
+          const apiUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent(url);
           const res = await fetch(apiUrl);
           const data = await res.json();
-          allItems = allItems.concat(data.items);
+
+          const parser = new DOMParser();
+          const xml = parser.parseFromString(data.contents, "text/xml");
+          const items = xml.querySelectorAll("item");
+
+          items.forEach(item => {
+            allItems.push({
+              title: item.querySelector("title").textContent,
+              link: item.querySelector("link").textContent,
+              description: item.querySelector("description") ? item.querySelector("description").textContent : "",
+              pubDate: item.querySelector("pubDate") ? item.querySelector("pubDate").textContent : ""
+            });
+          });
         }
 
-        // Filter berdasarkan kata kunci
+        // Filter berita hanya yang mengandung kata kunci trading
         const filtered = allItems.filter(item => {
-          const title = item.title.toLowerCase();
-          return keywords.some(kw => title.includes(kw));
+          const text = (item.title + " " + item.description).toLowerCase();
+          return keywords.some(kw => text.includes(kw));
         });
 
         // Urutkan berdasarkan tanggal terbaru
@@ -289,16 +306,14 @@
         container.innerHTML = "";
 
         if (filtered.length === 0) {
-          container.innerHTML = "Tidak ada berita trading/finansial terbaru.";
+          container.innerHTML = "Tidak ada berita trading (XAUUSD, Forex, Crypto, USD, The Fed) terbaru.";
         }
 
         // Tampilkan max 20 berita
         filtered.slice(0, 20).forEach(item => {
           const div = document.createElement("div");
           div.classList.add("berita-item");
-          div.innerHTML = `
-            <a href="${item.link}" target="_blank">${item.title}</a>
-          `;
+          div.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a>`;
           container.appendChild(div);
         });
 
