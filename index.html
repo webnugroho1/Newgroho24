@@ -3,16 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NEWGROHO24 WEB</title>
+  <title>NEWGROHO24 Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary-color: #fcd535;
+      --secondary-color: #007bff;
+      --bg-dark: #0f0f0f;
+      --bg-dark-light: #181818;
+      --text-color: #e5e5e5;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f0f0f;
-      color: #e5e5e5;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-color);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      transition: all 0.3s ease;
     }
 
     /* Header */
@@ -22,61 +35,69 @@
       left: 0;
       right: 0;
       height: 60px;
-      background: linear-gradient(90deg, #fcd535, #b8860b, #000);
+      background: linear-gradient(90deg, #fcd535, #b8860b);
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 0 20px;
       z-index: 1003;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
     }
 
     header h1 {
       margin: 0;
-      font-size: 20px;
+      font-size: 24px;
       color: #fff;
-      letter-spacing: 1px;
       text-transform: uppercase;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     }
 
     /* Tombol menu */
     .menu-btn {
       position: fixed;
-      top: 12px;
-      left: 15px;
-      background: #007bff;
+      top: 15px;
+      left: 20px;
+      background: rgba(0,0,0,0.5);
       color: #fff;
       border: none;
-      padding: 10px 12px;
-      border-radius: 6px;
+      padding: 8px 12px;
+      border-radius: 8px;
       font-size: 20px;
       cursor: pointer;
       z-index: 1004;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .menu-btn:hover {
+      background: rgba(0,0,0,0.8);
+      transform: scale(1.05);
     }
 
     /* Sidebar */
     .sidebar {
-      width: 220px;
-      background: #000;
-      color: white;
+      width: 250px;
+      background: #111;
+      color: var(--text-color);
       height: 100vh;
       position: fixed;
       top: 0;
-      left: -220px;
-      transition: left 0.3s ease;
+      left: -250px;
+      transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       overflow-y: auto;
       z-index: 1002;
       padding-top: 60px;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.5);
     }
 
     .sidebar.show { left: 0; }
 
     .sidebar h2 {
-      color: #fcd535;
+      color: var(--primary-color);
       text-align: center;
       margin: 0;
-      padding: 15px 0;
+      padding: 20px 0;
       border-bottom: 1px solid #222;
+      font-weight: 600;
     }
 
     .sidebar ul {
@@ -86,15 +107,22 @@
     }
 
     .sidebar ul li {
-      padding: 15px 20px;
+      padding: 18px 25px;
       cursor: pointer;
-      border-bottom: 1px solid #111;
-      transition: background 0.3s;
+      border-bottom: 1px solid #1a1a1a;
+      transition: background 0.3s ease, color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
 
     .sidebar ul li:hover {
-      background: #1a1a1a;
-      color: #fcd535;
+      background: #2a2a2a;
+      color: var(--primary-color);
+    }
+
+    .sidebar ul li i {
+      font-size: 18px;
     }
 
     /* Overlay */
@@ -105,20 +133,39 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
+      background: rgba(0,0,0,0.7);
+      z-index: 1001;
+      transition: opacity 0.3s ease;
+      opacity: 0;
     }
 
-    .overlay.show { display: block; }
+    .overlay.show {
+      display: block;
+      opacity: 1;
+    }
 
     /* Konten */
     .content {
       padding: 90px 30px 30px;
-      background: #181818;
+      background: var(--bg-dark-light);
       flex: 1;
+      transition: padding-left 0.3s ease;
+    }
+    
+    .content.pushed {
+      padding-left: calc(250px + 30px);
     }
 
-    .content h1 { color: #fcd535; }
+    .content h1 {
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    
+    .content h1.sub-header {
+        font-size: 28px;
+        color: var(--text-color);
+    }
 
     .hidden-page { display: none; }
 
@@ -126,68 +173,106 @@
     #list-berita { margin-top: 20px; }
     .berita-item {
       background: #222;
-      padding: 12px;
-      border-radius: 6px;
-      margin-bottom: 10px;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    .berita-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
     }
     .berita-item a {
       color: #4da6ff;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 1.5;
     }
     .berita-item a:hover { text-decoration: underline; }
+    .berita-item p {
+      font-size: 14px;
+      color: #bbb;
+      margin: 8px 0 0;
+    }
+    .berita-item small {
+      display: block;
+      color: #888;
+      font-size: 12px;
+      margin-top: 5px;
+    }
 
     /* Trading container */
     .trading-container {
       margin-top: 30px;
       background: #111;
-      border: 2px solid #fcd535;
-      border-radius: 10px;
+      border: 2px solid var(--primary-color);
+      border-radius: 12px;
       padding: 15px;
-      position: relative;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    .trading-container .tradingview-widget-container {
+      border-radius: 8px;
       overflow: hidden;
     }
 
     /* Footer */
     footer {
       text-align: center;
-      padding: 15px;
+      padding: 20px;
       background: #000;
-      color: #fcd535;
+      color: var(--primary-color);
       margin-top: auto;
+      font-size: 14px;
+    }
+
+    /* Responsiveness */
+    @media (min-width: 768px) {
+      .menu-btn { display: none; }
+      .sidebar {
+        left: 0;
+        top: 0;
+        padding-top: 60px;
+      }
+      .content {
+        padding-left: calc(250px + 30px);
+      }
+      .overlay.show {
+        display: none;
+      }
+      .trading-container {
+          padding: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
     <h1>NEWGROHO24 WEB</h1>
   </header>
 
-  <!-- Tombol menu -->
-  <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+  <button class="menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
 
-  <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <h2>Menu</h2>
     <ul>
-      <li onclick="showPage('beranda')">🏠 Beranda</li>
-      <li onclick="showPage('news')">📰 News</li>
-      <li onclick="showPage('analisa')">📊 Analisa</li>
-      <li onclick="showPage('personal')">👤 Personal</li>
-      <li onclick="showPage('kontak')">☎️ Kontak</li>
+      <li onclick="showPage('beranda')"><i class="fas fa-home"></i> Beranda</li>
+      <li onclick="showPage('news')"><i class="fas fa-newspaper"></i> News</li>
+      <li onclick="showPage('analisa')"><i class="fas fa-chart-line"></i> Analisa</li>
+      <li onclick="showPage('personal')"><i class="fas fa-user-circle"></i> Personal</li>
+      <li onclick="showPage('kontak')"><i class="fas fa-phone"></i> Kontak</li>
     </ul>
   </div>
 
-  <!-- Overlay -->
   <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-  <!-- Konten -->
   <div class="content" id="content">
     <div id="beranda" class="page">
-      <h1>Selamat Datang di NEWGROHO24 Web</h1>
-
-      <!-- TradingView Chart -->
+      <h1>Selamat Datang</h1>
+      <h1 class="sub-header">Analisis Pasar & Berita Keuangan</h1>
+      <p>Ini adalah sumber informasi terpercaya Anda untuk analisis teknikal dan berita terkini seputar trading, khususnya XAUUSD, Forex, dan Crypto.</p>
+      
       <div class="trading-container">
         <div class="tradingview-widget-container">
           <div id="tradingview_chart"></div>
@@ -216,7 +301,9 @@
 
     <div id="news" class="page hidden-page">
       <h1>News</h1>
-      <div id="list-berita">Loading berita...</div>
+      <div id="list-berita">
+        <p>Loading berita...</p>
+      </div>
     </div>
 
     <div id="analisa" class="page hidden-page">
@@ -236,21 +323,27 @@
   </div>
 
   <footer>
-    &copy; 2025 NEWGROHO24
+    &copy; 2025 NEWGROHO24 | All Rights Reserved
   </footer>
 
   <script>
     function showPage(pageId) {
       document.querySelectorAll('.page').forEach(p => p.classList.add('hidden-page'));
       document.getElementById(pageId).classList.remove('hidden-page');
-      toggleSidebar();
+      
+      // Close sidebar on mobile
+      if (window.innerWidth <= 768) {
+        toggleSidebar();
+      }
     }
 
     function toggleSidebar() {
       let sidebar = document.getElementById("sidebar");
       let overlay = document.getElementById("overlay");
+      let content = document.getElementById("content");
       sidebar.classList.toggle("show");
       overlay.classList.toggle("show");
+      content.classList.toggle("pushed");
     }
 
     // === Ambil berita dari RSS via AllOrigins ===
@@ -260,7 +353,6 @@
       "https://www.investing.com/rss/news_25.rss"
     ];
 
-    // Kata kunci fokus ke trading
     const keywords = [
       "xauusd", "emas", "gold",
       "forex", "usd", "dollar",
@@ -270,16 +362,15 @@
 
     async function loadNews() {
       const container = document.getElementById("list-berita");
-      container.innerHTML = "Loading...";
+      container.innerHTML = `<p>Memuat berita...</p>`;
 
       try {
         let allItems = [];
 
         for (let url of rssFeeds) {
-          const apiUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent(url);
+          const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
           const res = await fetch(apiUrl);
           const data = await res.json();
-
           const parser = new DOMParser();
           const xml = parser.parseFromString(data.contents, "text/xml");
           const items = xml.querySelectorAll("item");
@@ -288,37 +379,38 @@
             allItems.push({
               title: item.querySelector("title").textContent,
               link: item.querySelector("link").textContent,
-              description: item.querySelector("description") ? item.querySelector("description").textContent : "",
-              pubDate: item.querySelector("pubDate") ? item.querySelector("pubDate").textContent : ""
+              description: item.querySelector("description") ? item.querySelector("description").textContent.replace(/<[^>]*>?/gm, '').trim() : "Tidak ada deskripsi.",
+              pubDate: item.querySelector("pubDate") ? new Date(item.querySelector("pubDate").textContent) : new Date()
             });
           });
         }
 
-        // Filter berita hanya yang mengandung kata kunci trading
         const filtered = allItems.filter(item => {
           const text = (item.title + " " + item.description).toLowerCase();
           return keywords.some(kw => text.includes(kw));
         });
 
-        // Urutkan berdasarkan tanggal terbaru
-        filtered.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+        filtered.sort((a, b) => b.pubDate - a.pubDate);
 
         container.innerHTML = "";
 
         if (filtered.length === 0) {
-          container.innerHTML = "Tidak ada berita trading (XAUUSD, Forex, Crypto, USD, The Fed) terbaru.";
+          container.innerHTML = `<p>Tidak ada berita trading terbaru yang relevan.</p>`;
         }
 
-        // Tampilkan max 20 berita
         filtered.slice(0, 20).forEach(item => {
           const div = document.createElement("div");
           div.classList.add("berita-item");
-          div.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a>`;
+          div.innerHTML = `
+            <a href="${item.link}" target="_blank">${item.title}</a>
+            <p>${item.description.substring(0, 150)}...</p>
+            <small>Dipublikasikan: ${item.pubDate.toLocaleDateString('id-ID', {day: '2-digit', month: 'long', year: 'numeric'})}</small>
+          `;
           container.appendChild(div);
         });
 
       } catch (e) {
-        container.innerHTML = "Gagal memuat berita.";
+        container.innerHTML = `<p style="color: red;">Gagal memuat berita. Silakan coba lagi nanti.</p>`;
         console.error(e);
       }
     }
