@@ -10,17 +10,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary-color: #fcd535;
-      --secondary-color: #007bff;
-      --bg-dark: #0f0f0f;
-      --bg-dark-light: #181818;
+      --primary-color: #3d9df2;   /* biru cerah */
+      --secondary-color: #7f5af0; /* ungu */
+      --bg-dark: #0d0d2b; 
+      --bg-dark-light: #16162e;
       --text-color: #e5e5e5;
     }
 
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f0f0f, #1a1a1a, #0f0f0f);
+      background: linear-gradient(135deg, #0d0d2b, #1a1a3d, #0d0d2b);
       color: var(--text-color);
       display: flex;
       flex-direction: column;
@@ -35,7 +35,7 @@
       left: 0;
       right: 0;
       height: 60px;
-      background: linear-gradient(90deg, #fcd535, #b8860b);
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
       display: flex;
       align-items: center;
       justify-content: center;
@@ -60,7 +60,7 @@
       top: 12px;
       left: 20px;
       background: var(--primary-color);
-      color: #000;
+      color: #fff;
       border: none;
       padding: 8px 12px;
       border-radius: 8px;
@@ -71,14 +71,14 @@
       transition: background 0.3s ease, transform 0.2s ease;
     }
     .menu-btn:hover {
-      background: #ffe55c;
+      background: var(--secondary-color);
       transform: scale(1.05);
     }
 
     /* Sidebar */
     .sidebar {
       width: 250px;
-      background: rgba(20, 20, 20, 0.9);
+      background: rgba(25, 25, 50, 0.95);
       backdrop-filter: blur(10px);
       color: var(--text-color);
       height: 100vh;
@@ -190,7 +190,7 @@
     /* Styling berita */
     #list-berita { margin-top: 20px; }
     .berita-item {
-      background: rgba(34,34,34,0.85);
+      background: rgba(34,34,60,0.85);
       backdrop-filter: blur(6px);
       border: 1px solid rgba(255,255,255,0.1);
       padding: 15px;
@@ -204,7 +204,7 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.6);
     }
     .berita-item a {
-      color: #4da6ff;
+      color: var(--primary-color);
       text-decoration: none;
       font-weight: 600;
       font-size: 18px;
@@ -223,25 +223,11 @@
       margin-top: 5px;
     }
 
-    /* Trading container */
-    .trading-container {
-      margin-top: 30px;
-      background: rgba(17,17,17,0.9);
-      border: 2px solid var(--primary-color);
-      border-radius: 14px;
-      padding: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-    }
-    .trading-container .tradingview-widget-container {
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
     /* Footer */
     footer {
       text-align: center;
       padding: 20px;
-      background: #000;
+      background: #0a0a1a;
       color: var(--primary-color);
       margin-top: auto;
       font-size: 14px;
@@ -261,9 +247,6 @@
       }
       .overlay.show {
         display: none;
-      }
-      .trading-container {
-          padding: 20px;
       }
     }
   </style>
@@ -293,31 +276,6 @@
       <h1><i class="fas fa-star"></i> Selamat Datang</h1>
       <h1 class="sub-header">Analisis Pasar & Berita Keuangan</h1>
       <p>Ini adalah sumber informasi terpercaya Anda untuk analisis teknikal dan berita terkini seputar trading, khususnya XAUUSD, Forex, dan Crypto.</p>
-      
-      <div class="trading-container">
-        <div class="tradingview-widget-container">
-          <div id="tradingview_chart"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-          <script type="text/javascript">
-            new TradingView.widget({
-              "width": "100%",
-              "height": 400,
-              "symbol": "OANDA:XAUUSD",
-              "interval": "30",
-              "timezone": "Etc/UTC",
-              "theme": "dark",
-              "style": "1",
-              "locale": "id",
-              "toolbar_bg": "#000000",
-              "enable_publishing": false,
-              "hide_top_toolbar": false,
-              "hide_legend": false,
-              "save_image": false,
-              "container_id": "tradingview_chart"
-            });
-          </script>
-        </div>
-      </div>
     </div>
 
     <div id="news" class="page hidden-page">
